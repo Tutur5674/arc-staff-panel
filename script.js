@@ -1,16 +1,16 @@
-// 1️⃣ Connecte ton site à Supabase
-const supabaseUrl = 'TON_URL_SUPABASE';
-const supabaseKey = 'TA_CLE_API';
+// ================== CONNEXION SUPABASE ==================
+const supabaseUrl = 'https://zghxnojpgcduqslmgvwj.supabase.co';
+const supabaseKey = 'sb_publishable_gh0N36uVRghFc78Vn9tJUA_VkKPyX6S';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-// 2️⃣ Fonction inscription
+// ================== INSCRIPTION ==================
 async function register() {
     const username = document.getElementById('reg-username').value;
     const password = document.getElementById('reg-password').value;
     const role = document.getElementById('reg-role').value;
 
-    // Vérifie si le pseudo existe déjà
-    let { data: user, error } = await supabase
+    // Vérifie si pseudo existe
+    let { data: user } = await supabase
         .from('users')
         .select('*')
         .eq('discord_username', username);
@@ -21,23 +21,20 @@ async function register() {
     }
 
     // Crée le compte
-    let { data, errorInsert } = await supabase
+    let { error } = await supabase
         .from('users')
         .insert([{ discord_username: username, password: password, role: role }]);
 
-    if (errorInsert) {
-        alert('Erreur : ' + errorInsert.message);
-    } else {
-        alert('Compte créé ! Connecte-toi maintenant.');
-    }
+    if (error) alert('Erreur : ' + error.message);
+    else alert('Compte créé ! Connecte-toi maintenant.');
 }
 
-// 3️⃣ Fonction login
+// ================== LOGIN ==================
 async function login() {
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
 
-    let { data: user, error } = await supabase
+    let { data: user } = await supabase
         .from('users')
         .select('*')
         .eq('discord_username', username)
@@ -48,7 +45,6 @@ async function login() {
         return;
     }
 
-    // Stocke info dans sessionStorage et redirige
     sessionStorage.setItem('user', JSON.stringify(user[0]));
     window.location.href = 'dashboard.html';
 }
