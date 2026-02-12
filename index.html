@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ARC Staff Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>ARC Staff Panel</h1>
 
+    <div id="login-form">
+        <h2>Connexion</h2>
+        <input type="text" id="login-username" placeholder="Pseudo Discord">
+        <input type="password" id="login-password" placeholder="Mot de passe">
+        <button onclick="login()">Se connecter</button>
+    </div>
+
+    <div id="register-form">
+        <h2>Créer un compte</h2>
+        <input type="text" id="reg-username" placeholder="Pseudo Discord">
+        <input type="password" id="reg-password" placeholder="Mot de passe">
+        <select id="reg-role">
+            <option value="staff">Staff</option>
+            <option value="admin">Admin</option>
+        </select>
+        <button onclick="register()">S’inscrire</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
